@@ -1,11 +1,35 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home of First App</title>
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
 </head>
 <body>
     <h1>This is homepage of First App</h1>
+    <h2>I am beign called from views.py of First_App</h2>
+    <h3>{{ text_1 }}</h3>
+    <h2>Musician List</h2>
+    <table border="1">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Instrument</th>
+        </tr>
+        
+        {% for row in musician %}
+
+        <tr>
+            <td>{{ row.first_name }}</td>
+            <td>{{ row.last_name }}</td>
+            <td>{{ row.instrument }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+    <img src="{% static "img/Dunes.jpg" %}"   alt="">
 </body>
 </html>

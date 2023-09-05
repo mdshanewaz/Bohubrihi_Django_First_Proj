@@ -20,19 +20,24 @@ def form(request):
         'heading_1' : 'This form is created using django Library',
     }
 
-    if request.method == 'POST':
+    if request.method == "POST":
         
         new_form = forms.user_form(request.POST)
+        diction.update({'test_form' : new_form})
         
         if new_form.is_valid():
-            user_name = new_form.cleaned_data['user_name']
-            user_email = new_form.cleaned_data['user_email']
-            user_dob = new_form.cleaned_data['user_dob']
+            # user_name = new_form.cleaned_data['user_name']
+            # user_email = new_form.cleaned_data['user_email']
+            # user_dob = new_form.cleaned_data['user_dob']
 
-            diction.update({'user_name' : user_name})
-            diction.update({'user_email' : user_email})
-            diction.update({'user_dob' : user_dob})
-            diction.update({'form_submited' : "Yes"})
+            # diction.update({'user_name' : user_name})
+            # diction.update({'user_email' : user_email})
+            # diction.update({'user_dob' : user_dob})
+            # diction.update({'boolean_field' : new_form.cleaned_data['boolean_chck']})
+            #diction.update({'field_1' : new_form.cleaned_data['field_1']})
+            diction.update({'field_1' : new_form.cleaned_data['field_2']})
+            diction.update({'field' : 'fields match!'})
+            diction.update({'form_submited' : 'Yes'})
 
     return render(request, 'first_app/form.html', context=diction)
 

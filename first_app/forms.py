@@ -1,7 +1,16 @@
 from django import forms
-from first_app import models
+#from first_app.models import Album, Musician #Album
+from first_app import models #models.Album
 from django.core import validators
 
+
+class MusicianForm(forms.ModelForm):
+    
+    class Meta:
+        model = models.Musician
+        fields = '__all__'
+        #exclude = ['first_name']
+        #fields = ('first_name', 'last_name',)
 
 def even_or_odd(value):
     if value%2 == 1:

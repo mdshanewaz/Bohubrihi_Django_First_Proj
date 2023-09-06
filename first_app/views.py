@@ -5,13 +5,16 @@ from first_app import forms
 
 # Create your views here.
 
-def home(request):
-    musician_list = Musician.objects.order_by('first_name')
-    diction = {
-        'text_1' : 'I am a text from views.py',
-        'musician' : musician_list,
-    }
-    return render(request, 'first_app/index.html', context=diction)
+# def home(request):
+#     musician_list = Musician.objects.order_by('first_name')
+#     diction = {
+#         'text_1' : 'I am a text from views.py',
+#         'musician' : musician_list,
+#         # 'sample_txt' : Album.objects.get(pk=1).release_date,
+
+#         'sample_txt' : 'Sample text from view',
+#     }
+#     return render(request, 'first_app/index.html', context=diction)
 
 def form(request):
     #new_form = forms.user_form()
@@ -23,7 +26,7 @@ def form(request):
 
         if new_form.is_valid():
             new_form.save(commit=True)
-            return home(request)
+            return index(request)
 
     diction = {
         'test_form' : new_form,
@@ -52,8 +55,53 @@ def form(request):
 
     return render(request, 'first_app/form.html', context=diction)
 
-def contact(request):
-    return HttpResponse("<h1>This is Contact Page</h1>")
+def index(request):
+    musician_list = Musician.objects.order_by('first_name')
+    diction = {
+        'title' : 'Home Page',
+        'listofmusician' : musician_list,
+    }
+    return render(request, 'first_app/index.html', context= diction)
 
-def about(request):
-    return HttpResponse("<h1>About Us</h1>")
+def album_list(request):
+    diction = {
+        'title' : 'List of Albums',
+    }
+    return render(request, 'first_app/album_lsit.html', context=diction)
+
+def musician_list(request):
+    diction = {
+        'title' : 'List of Musician',
+    }
+    return render(request, 'first_app/musician_list.html', context=diction) 
+
+def album_form(request):
+    album_form = forms.AlbumForm
+    diction = {
+        'title' : 'Add Album',
+        'form' : album_form
+    }
+    if request.method == "POST":
+        album_form = forms.AlbumForm(request.POST)
+
+        if album_form.is_valid():
+            album_form.save( commit=True)
+            return index(request)
+
+    return render(request, 'first_app/album_form.html', context=diction)
+
+def musician_form(request):
+    musician_form = forms.MusicianForm
+    diction = {
+        'title' : "Add Musician",
+        'form' : musician_form,
+    }
+
+    if request.method == "POST":
+        musician_form = forms.MusicianForm(request.POST)
+
+        if musician_form.is_valid():
+            musician_form.save(commit=True)
+            return index(request)
+
+    return render(request, 'first_app/musician_form.html', context=diction)

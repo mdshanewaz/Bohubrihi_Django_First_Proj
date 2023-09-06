@@ -1,0 +1,39 @@
+{% extends "first_app/base.html" %}
+
+{% load static %}
+
+{% load HTML_filter %}
+
+{% block body_block %}
+
+    <!-- <h3 style="color: blueviolet;">{{ sample_txt|date:"D, d M Y" }}</h3> -->
+    <!-- <h3 style="color: blueviolet;">{{ sample_txt|cut:"t"|upper }}</h3> -->
+
+    <h3 style="color: blueviolet;">{{ sample_txt|custome_filter:"New Arg added" }}</h3>
+
+    <h1>This is homepage of First App</h1>
+    <h2>I am beign called from views.py of First_App</h2>
+    <h3>{{ text_1 }}</h3>
+    <a href="/form/">Add New</a>
+    <h2>Musician List</h2>
+    <table border="1">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Instrument</th>
+        </tr>
+        
+        {% for row in musician %}
+
+        <tr>
+            <td>{{ row.first_name }}</td>
+            <td>{{ row.last_name }}</td>
+            <td>{{ row.instrument }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+    <br>
+    <img class="img-fluid" src="{% static "img/Dunes.jpg" %}"   alt="">
+{% endblock %}

@@ -31,6 +31,9 @@ class Album(models.Model):
 
     num_stars = models.IntegerField(choices = rating)
 
+    # class Meta:
+    #     db_table = "album"
+
     def __str__(self):
         return self.name + ", Ratting : " + str(self.num_stars)
 

@@ -17,7 +17,6 @@ from first_app import forms
 #     return render(request, 'first_app/index.html', context=diction)
 
 def form(request):
-    #new_form = forms.user_form()
 
     new_form = forms.MusicianForm()
 
@@ -32,6 +31,7 @@ def form(request):
         'test_form' : new_form,
         #'heading_1' : 'This form is created using django Library',
         'heading_1' : 'Add New Musician',
+        'title' : 'Forms'
     }
 
     # if request.method == "POST":
@@ -63,11 +63,13 @@ def index(request):
     }
     return render(request, 'first_app/index.html', context= diction)
 
-def album_list(request):
+def album_list(request, artist_id):
+    artist_info = Musician.objects.get(pk=artist_id)
     diction = {
         'title' : 'List of Albums',
+        'artist_info' : artist_info,
     }
-    return render(request, 'first_app/album_lsit.html', context=diction)
+    return render(request, 'first_app/album_list.html', context=diction)
 
 def musician_list(request):
     diction = {

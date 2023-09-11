@@ -7,7 +7,7 @@
     <h4>Instument : {{ artist_info.instrument }}</h4>
     <h4>Artist Rating: {{ artist_rating.num_stars__avg }}</h4>
     
-    <a class="btn btn-warning" href="">EDIT</a>
+    <a class="btn btn-warning" href="{% url 'edit_artist' artist_id=artist_info.id %}">EDIT</a>
 
     <h5>List of album</h5>
     <table class="table table-bordered">

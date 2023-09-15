@@ -17,11 +17,14 @@
             <th>Rating</th>
         </tr>
         {% for album in album_info %}
-            <tr>
-                <td>{{ album.name }}</td>
+        <tr>
+                <td><a href="{% url 'edit_album' album_id=album.id %}">{{ album.name }}</a></td>
                 <td>{{ album.release_date|date:"M d, Y" }}</td>
                 <td>{{ album.num_stars }}</td>
-            </tr>
+        </tr>
         {% endfor %}
+    </table>
 
+    <br>
+    <a href="" onc>DELETE</a>
 {% endblock %}

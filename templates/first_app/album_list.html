@@ -26,5 +26,5 @@
     </table>
 
     <br>
-    <a href="" onc>DELETE</a>
+    <a class="btn btn-sm btn-danger" href="{% url 'delete_artist' artist_id=artist_info.id %}" onclick="return confirm('Delete Musician?')">DELETE</a>
 {% endblock %}

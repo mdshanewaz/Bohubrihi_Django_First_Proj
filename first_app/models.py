@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -37,4 +38,11 @@ class Album(models.Model):
     def __str__(self):
         return self.name + ", Ratting : " + str(self.num_stars)
 
-    
+
+class Userinfo(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_pic = models.ImageField(upload_to= 'profile_pics', blank=True)
+    facebook_id = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.user.username

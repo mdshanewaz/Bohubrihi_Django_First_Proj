@@ -13,3 +13,4 @@ urlpatterns = [
     path('delete_artist/<int:artist_id>/', views.delete_artist, name='delete_artist'),   
     path('form/', views.form, name='form'),
 ]
+

@@ -168,4 +168,3 @@ def delete_artist(request, artist_id):
 
     return render(request, 'first_app/delete.html', context=diction)
 
-def index()

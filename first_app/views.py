@@ -51,6 +51,13 @@ def register(request):
 
     return render(request, 'first_app/register.html', context=diction)
 
+def login(request):
+    diction = {
+        'title' : 'Login',
+    }
+    return render(request, 'first_app/login.html', context=diction)
+
+
 def form(request):
 
     new_form = forms.MusicianForm()

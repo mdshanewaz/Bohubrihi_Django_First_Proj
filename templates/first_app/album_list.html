@@ -7,7 +7,7 @@
     <h4>Instument : {{ artist_info.instrument }}</h4>
     <h4>Artist Rating: {{ artist_rating.num_stars__avg }}</h4>
     
-    <a class="btn btn-warning" href="{% url 'edit_artist' artist_id=artist_info.id %}">EDIT</a>
+    <a class="btn btn-warning" href="{% url 'first_app:edit_artist' artist_id=artist_info.id %}">EDIT</a>
 
     <h5>List of album</h5>
     <table class="table table-bordered">
@@ -18,7 +18,7 @@
         </tr>
         {% for album in album_info %}
         <tr>
-                <td><a href="{% url 'edit_album' album_id=album.id %}">{{ album.name }}</a></td>
+                <td><a href="{% url 'first_app:edit_album' album_id=album.id %}">{{ album.name }}</a></td>
                 <td>{{ album.release_date|date:"M d, Y" }}</td>
                 <td>{{ album.num_stars }}</td>
         </tr>
@@ -26,5 +26,5 @@
     </table>
 
     <br>
-    <a class="btn btn-sm btn-danger" href="{% url 'delete_artist' artist_id=artist_info.id %}" onclick="return confirm('Delete Musician?')">DELETE</a>
+    <a class="btn btn-sm btn-danger" href="{% url 'first_app:delete_artist' artist_id=artist_info.id %}" onclick="return confirm('Delete Musician?')">DELETE</a>
 {% endblock %}

@@ -11,5 +11,5 @@
         <input class="btn btn-info" type="submit" name="submit" value="UPDATE">
     </form>
     <br>
-    <a class="btn btn-danger btn-sm" href="{% url 'delete_album' album_id=album_id %}" onclick="return confirm('Delete this Album?')">DELETE</a>
+    <a class="btn btn-danger btn-sm" href="{% url 'first_app:delete_album' album_id=album_id %}" onclick="return confirm('Delete this Album?')">DELETE</a>
 {% endblock %}

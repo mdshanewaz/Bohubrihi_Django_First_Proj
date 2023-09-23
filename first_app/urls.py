@@ -2,6 +2,8 @@
 from django.urls import path
 from first_app import views
 
+app_name = 'first_app'
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('add_album/', views.album_form, name='album_form'),
@@ -12,7 +14,8 @@ urlpatterns = [
     path('delete_album/<int:album_id>/', views.delete_album, name='delete_album'),
     path('delete_artist/<int:artist_id>/', views.delete_artist, name='delete_artist'),
     path('register/', views.register, name="register"),
-    path('login/', views.login, name='login'),   
+    path('login/', views.login_view, name='login'),
+    path('user_login/', views.user_login, name='user_login'),   
     path('form/', views.form, name='form'),
 ]
 

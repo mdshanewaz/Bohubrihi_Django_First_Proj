@@ -4,6 +4,10 @@ from first_app.models import Musician, Album
 from first_app import forms
 from first_app.forms import UserForm, UserInfoForm
 from django.db.models import Avg, Max, Min
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 # Create your views here.
 
@@ -51,12 +55,29 @@ def register(request):
 
     return render(request, 'first_app/register.html', context=diction)
 
-def login(request):
+def login_view(request):
     diction = {
         'title' : 'Login',
     }
     return render(request, 'first_app/login.html', context=diction)
 
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                return HttpResponse('Account is not active!')
+        else:
+            return HttpResponse("Login details are worng!")
+    else:
+        return render(request, 'first_app/login.html', context={})
 
 def form(request):
 

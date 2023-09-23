@@ -1,6 +1,8 @@
 # from django.conf.urls import url
 from django.urls import path
 from first_app import views
+from django.conf import settings
+from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
 
 app_name = 'first_app'
 
@@ -15,7 +17,10 @@ urlpatterns = [
     path('delete_artist/<int:artist_id>/', views.delete_artist, name='delete_artist'),
     path('register/', views.register, name="register"),
     path('login/', views.login_view, name='login'),
+    path( 'logout/', views.user_logout, name='logout'),
     path('user_login/', views.user_login, name='user_login'),   
     path('form/', views.form, name='form'),
 ]
 
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

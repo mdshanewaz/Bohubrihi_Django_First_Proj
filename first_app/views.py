@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from first_app.models import Musician, Album
+from first_app.models import Musician, Album, Userinfo
 from first_app import forms
 from first_app.forms import UserForm, UserInfoForm
 from django.db.models import Avg, Max, Min
@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -71,13 +72,21 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect(reverse('index'))
+                return HttpResponseRedirect(reverse('first_app:index'))
+                #return render(request, 'first_app/index.html', context={})
+                #return index(request)
             else:
                 return HttpResponse('Account is not active!')
         else:
             return HttpResponse("Login details are worng!")
     else:
-        return render(request, 'first_app/login.html', context={})
+        #return render(request, 'first_app/login.html', context={"title":"Login"})
+        return HttpResponseRedirect(reverse('first_app:login'))
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('first_app:index'))
 
 def form(request):
 
@@ -124,6 +133,22 @@ def index(request):
         'title' : 'Home Page',
         'listofmusician' : musician_list,
     }
+
+    if request.user.is_authenticated:
+        current_user = request.user
+        user_id = current_user.id
+        user_basic_info = User.objects.get(pk=user_id)
+        user_more_info = Userinfo.objects.get(user__pk=user_id) # Here '__' is the where condition of sql
+
+        diction.update(
+            {
+             'user_basic_info': user_basic_info,
+             'user_more_info' : user_more_info,
+             }
+        )
+
+    print(diction)
+
     return render(request, 'first_app/index.html', context= diction)
 
 def album_list(request, artist_id):

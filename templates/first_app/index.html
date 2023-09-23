@@ -15,5 +15,14 @@
         <h4>No Musician is available in the list</h4>
     {% endif %}    
 </ul>
+{% if user.is_authenticated %}
+    <p>Hi {{ user_basic_info.username }},</p>
+    <p>Your email: {{ user_basic_info.email }}</p>
+    <img src="/media/{{ user_more_info.profile_pic }}" alt="">
+    
+    <p><a href="{{ user_more_info.facebook_id }}">Facebook Profile</a></p>
+{% else %}
+    <div class="alert alert-primary">You are not logged in!</div>
+{% endif %}
 
 {% endblock %}

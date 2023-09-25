@@ -1,14 +1,14 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from first_app.models import Musician, Album, Userinfo
-from first_app import forms
+from first_app import forms, models
 from first_app.forms import UserForm, UserInfoForm
 from django.db.models import Avg, Max, Min
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.views.generic import View, TemplateView, DetailView, ListView
 
 # Create your views here.
 
@@ -22,6 +22,9 @@ from django.contrib.auth.models import User
 #         'sample_txt' : 'Sample text from view',
 #     }
 #     return render(request, 'first_app/index.html', context=diction)
+
+class IndexView(TemplateView):
+    template_name = 'first_app/index.html'
 
 def register(request):
     registered = False
@@ -126,6 +129,25 @@ def form(request):
             # diction.update({'form_submited' : 'Yes'})
 
     return render(request, 'first_app/form.html', context=diction)
+
+class IndexView(TemplateView, ListView):
+    # template_name = 'first_app/index1.html'
+    
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(*kwargs)
+    #     context['sample_text_1'] = "Sample Text 1"
+    #     context['sample_text_2'] = "Sample Text 2"
+
+        # return context
+    
+    context_object_name = 'musician_list'
+    model = models.Musician
+    template_name = 'first_app/musician_list2.html'
+
+class MusicianDetailView(DetailView):
+    context_object_name = 'musician'
+    model = models.Musician
+    template_name = 'first_app/musician_details.html'
 
 def index(request):
     musician_list = Musician.objects.order_by('first_name')
@@ -254,4 +276,6 @@ def delete_artist(request, artist_id):
     }
 
     return render(request, 'first_app/delete.html', context=diction)
+
+
 

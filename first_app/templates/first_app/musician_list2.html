@@ -1,0 +1,13 @@
+{% extends "first_app/base.html" %}
+
+{% load static %}
+
+{% load HTML_filter %}
+
+{% block body_block %}
+<ul> 
+    {% for musician in musician_list %}
+        <li><a href="">{{ musician.first_name }} {{ musician.last_name }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

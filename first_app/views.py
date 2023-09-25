@@ -23,8 +23,16 @@ from django.views.generic import View, TemplateView, DetailView, ListView
 #     }
 #     return render(request, 'first_app/index.html', context=diction)
 
-class IndexView(TemplateView):
-    template_name = 'first_app/index.html'
+class IndexView(ListView):
+    context_object_name = 'musician_list'
+    model = models.Musician
+    template_name = 'first_app/musician_list2.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'New_List2'
+        return context
+    
 
 def register(request):
     registered = False
@@ -129,20 +137,6 @@ def form(request):
             # diction.update({'form_submited' : 'Yes'})
 
     return render(request, 'first_app/form.html', context=diction)
-
-class IndexView(TemplateView, ListView):
-    # template_name = 'first_app/index1.html'
-    
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(*kwargs)
-    #     context['sample_text_1'] = "Sample Text 1"
-    #     context['sample_text_2'] = "Sample Text 2"
-
-        # return context
-    
-    context_object_name = 'musician_list'
-    model = models.Musician
-    template_name = 'first_app/musician_list2.html'
 
 class MusicianDetailView(DetailView):
     context_object_name = 'musician'

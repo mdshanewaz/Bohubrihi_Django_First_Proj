@@ -22,7 +22,8 @@ urlpatterns = [
     path('form/', views.form, name='form'),
 
     path('indexview/', views.IndexView.as_view(), name='indexview'),
-    path('musicaian_detail/', views.MusicianDetailView.as_view(), name='musician_detail'),
+    path('musicaian_details/<pk>/', views.MusiciandetailView.as_view(), name='musician_details'),
+    path('test/', views.testview.as_view(), name='test'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

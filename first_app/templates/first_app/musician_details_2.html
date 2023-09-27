@@ -1,0 +1,21 @@
+{% extends "first_app/base.html" %}
+
+{% load static %}
+
+{% load HTML_filter %}
+
+{% block body_block %}
+
+    <h2>Musician Details:</h2>
+
+    <p>{{ musician.first_name }} {{ musician.last_name }}</p>
+    <p>{{ musician.instrument }}</p>
+
+    <h2>Album:</h2>
+    <ul>
+        {% for album in musician.album_list.all %}
+        <li>{{ album.name }}</li>
+        {% endfor %}
+    </ul>
+    
+{% endblock %}

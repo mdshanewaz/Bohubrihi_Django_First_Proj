@@ -32,7 +32,19 @@ class IndexView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'New_List2'
         return context
-    
+
+class MusiciandetailView(DetailView):
+    context_object_name = 'musician'
+    model = models.Musician
+    template_name = 'first_app/musician_details_2.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'New_detail'
+        return context
+
+class testview(TemplateView):
+    template_name = 'first_app/musician_details_2.html'
 
 def register(request):
     registered = False

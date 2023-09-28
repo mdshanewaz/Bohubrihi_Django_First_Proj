@@ -17,5 +17,8 @@
         <li>{{ album.name }}</li>
         {% endfor %}
     </ul>
+
+    <a class="btn btn-warning" href="{% url 'first_app:update_signer' pk=musician.pk %}">UPDATE INFO</a>
+    <a class="btn btn-danger" href="{% url 'first_app:delete_signer' pk=musician.pk %}">DELETE INFO</a>
     
 {% endblock %}

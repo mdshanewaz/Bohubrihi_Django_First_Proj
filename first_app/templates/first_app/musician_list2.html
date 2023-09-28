@@ -10,4 +10,5 @@
         <li><a href="{% url 'first_app:musician_details' pk=musician.pk  %}">{{ musician.first_name }} {{ musician.last_name }}</a></li>
     {% endfor %}
 </ul>
+<a class="btn btn-dark" href="{% url 'first_app:add_musician' %}">ADD NEW MUSICIAN</a>
 {% endblock %}

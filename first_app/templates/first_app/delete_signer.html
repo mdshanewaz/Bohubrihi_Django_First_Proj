@@ -1,0 +1,16 @@
+{% extends "first_app/base.html" %}
+{% load static %}
+
+{% load HTML_filter %}
+
+{% block body_block %}
+
+<h3>Delete {{ musician.first_name }} {{ musician.last_name }}?</h3>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input class="btn btn-danger" type="submit" name="submit" value="DELETE">
+    <a class="btn btn-primary" href="{% url 'first_app:musician_details' pk=musician.pk %}">CANCEL</a>
+</form>
+
+{% endblock %}

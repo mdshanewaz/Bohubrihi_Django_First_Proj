@@ -24,6 +24,9 @@ urlpatterns = [
     path('indexview/', views.IndexView.as_view(), name='indexview'),
     path('musicaian_details/<pk>/', views.MusiciandetailView.as_view(), name='musician_details'),
     path('test/', views.testview.as_view(), name='test'),
+    path('add_new_singer/', views.AddMusician.as_view(), name='add_musician'),
+    path('update_signer/<pk>/', views.MusicianupdateView.as_view(), name="update_signer"),
+    path('delete_signer/<pk>/', views.MusiciandeleteView.as_view(), name='delete_signer'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

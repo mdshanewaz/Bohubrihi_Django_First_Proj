@@ -6,9 +6,9 @@ from first_app.forms import UserForm, UserInfoForm
 from django.db.models import Avg, Max, Min
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.models import User
-from django.views.generic import View, TemplateView, DetailView, ListView
+from django.views.generic import View, TemplateView, DetailView, ListView, CreateView, DeleteView, UpdateView
 
 # Create your views here.
 
@@ -42,7 +42,38 @@ class MusiciandetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'New_detail'
         return context
+    
+class AddMusician(CreateView):
+    fields = ('first_name', 'last_name', 'instrument')
+    model = models.Musician
+    template_name = 'first_app/musician_add_new.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Add_New_Musicain'
+        return context
+
+class MusicianupdateView(UpdateView):
+    fields = ('first_name', 'last_name')
+    model = models.Musician
+    template_name = 'first_app/musician_add_new.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Update Signer'
+        return context
+
+class MusiciandeleteView(DeleteView):
+    context_object_name = 'musician'
+    model = models.Musician
+    success_url = reverse_lazy("first_app:indexview")
+    template_name = 'first_app/delete_signer.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Delete Signer'
+        return context
+    
 class testview(TemplateView):
     template_name = 'first_app/musician_details_2.html'
 

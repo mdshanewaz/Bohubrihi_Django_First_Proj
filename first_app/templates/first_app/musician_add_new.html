@@ -1,0 +1,22 @@
+{% extends "first_app/base.html" %}
+
+{% load static %}
+
+{% load HTML_filter %}
+
+{% block body_block %}
+
+{% if form.instance.pk %}
+
+<h3>Update Signer</h3>
+{% else %}
+<h3>ADD NEW SIGNER</h3>
+{% endif %}
+
+<form action="" method="POST">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input class="btn btn-success" type="submit" name="submit" id="" value="SAVE">        
+</form>
+
+{% endblock %}
